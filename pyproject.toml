@@ -13,10 +13,10 @@ multi_line_output = 3
 use_parentheses = true
 
 [tool.poetry]
-name = "python-template"
-version = "0.1.0"
+name = "LLM-Demo"
+version = "0.0.1"
 description = ""
-authors = ["YoungJae Kim <corea_kyj@naver.com>"]
+authors = ["Heewon Shin <heewon@comcom.ai>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
