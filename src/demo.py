@@ -4,11 +4,11 @@ import api
 from schemas import LLMRequest
 
 
-async def greet(prompt):
+async def generate(prompt):
     req = LLMRequest(prompt=prompt)
     task_id = await api.api_post(req)
     return api.api_get(task_id, 5)
 
 
-demo = gr.Interface(fn=greet, inputs="text", outputs="text")
-demo.launch()
+demo = gr.Interface(fn=generate, inputs="text", outputs="text")
+demo.launch(server_name="0.0.0.0", server_port=7860)
