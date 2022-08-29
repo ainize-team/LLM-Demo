@@ -67,3 +67,7 @@ Refer to these links
 5. Execute server
 
 - `python src/demo.py`
+
+## Execute example
+<img src="./image/Example1.png">
+<img src="./image/Example2.png">
