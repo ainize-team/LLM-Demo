@@ -24,21 +24,21 @@ async def api_post(data: LLMRequest) -> str:
         return res.json()["massage"]
 
 
-async def api_get(task_id: str, attempts: int) -> str:
+async def api_get(task_id: str) -> str:
     endpoint = llm_settings.llm_endpoint
-    logger.info(f"Left attempts: {attempts - 1} in {task_id}")
-    res = requests.get(
-        f"{endpoint}/result/{task_id}",
-        headers={
-            "accept": "application/json",
-        },
-    )
-    if res.status_code == 200 and res.json()["status"] == "completed":
-        result = res.json()["result"][0]
-        return result
-    if attempts <= 0:
-        logger.error("GET api Time Out")
-        return "error: Server Error"
-    await asyncio.sleep(2)
+    i = 0
+    for i in range(5):
+        logger.info(f"attempts: {i+1} in {task_id}")
+        res = requests.get(
+            f"{endpoint}/result/{task_id}",
+            headers={
+                "accept": "application/json",
+            },
+        )
+        if res.status_code == 200 and res.json()["status"] == "completed":
+            result = res.json()["result"][0]
+            return result
+        await asyncio.sleep(2)
 
-    return await api_get(task_id, attempts - 1)
+    logger.error("GET api Time Out")
+    return "error: Server Error"
