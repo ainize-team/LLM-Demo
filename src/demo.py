@@ -40,7 +40,6 @@ with gr.Blocks() as demo:
             prompt = gr.Textbox(lines=40, label="Enter prompt")
             with gr.Row():
                 gen = gr.Button("Generate")
-                advanced_button = gr.Button("Advanced options")
             with gr.Row():
                 model_types = gr.Radio(["BLOOM-176B", "OPT-66B"], label="Model Types", value="BLOOM-176B")
             with gr.Group() as advanced_option:
@@ -77,4 +76,4 @@ with gr.Blocks() as demo:
         )
 
 
-demo.launch(server_name="0.0.0.0")
+demo.launch(server_name="0.0.0.0", server_port=7860)
