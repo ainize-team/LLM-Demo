@@ -1,17 +1,19 @@
 from pydantic import BaseModel, Field
 
+from config import llm_settings
+
 
 class LLMRequest(BaseModel):
     prompt: str = Field(
         ...,
         min_length=1,
-        max_tokens=2048,
+        max_tokens=llm_settings.llm_max_length << 2,
         description="The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.",
     )
     max_new_tokens: int = Field(
         default=16,
         gt=0,
-        le=2048,
+        le=llm_settings.llm_max_length,
         description="he maximum numbers of tokens to generate, ignore the current number of tokens.",
     )
     do_sample: bool = Field(
