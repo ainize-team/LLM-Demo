@@ -1,5 +1,5 @@
+import asyncio
 import json
-from time import sleep
 
 import requests
 from loguru import logger
@@ -24,9 +24,9 @@ async def api_post(data: LLMRequest) -> str:
         return res.json()["massage"]
 
 
-def api_get(task_id: str, time: int) -> str:
+async def api_get(task_id: str, attempts: int) -> str:
     endpoint = llm_settings.llm_endpoint
-    logger.info(f"Left attempts: {time - 1} in {task_id}")
+    logger.info(f"Left attempts: {attempts - 1} in {task_id}")
     res = requests.get(
         f"{endpoint}/result/{task_id}",
         headers={
@@ -36,8 +36,9 @@ def api_get(task_id: str, time: int) -> str:
     if res.status_code == 200 and res.json()["status"] == "completed":
         result = res.json()["result"][0]
         return result
-    if time <= 0:
+    if attempts <= 0:
         logger.error("GET api Time Out")
         return "error: Server Error"
-    sleep(2)
-    return api_get(task_id, time - 1)
+    await asyncio.sleep(2)
+
+    return await api_get(task_id, attempts - 1)

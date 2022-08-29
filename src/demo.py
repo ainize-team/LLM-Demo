@@ -7,7 +7,7 @@ from schemas import LLMRequest
 async def generate(prompt):
     req = LLMRequest(prompt=prompt)
     task_id = await api.api_post(req)
-    return api.api_get(task_id, 5)
+    return await api.api_get(task_id, 5)
 
 
 demo = gr.Interface(fn=generate, inputs="text", outputs="text")
