@@ -4,12 +4,6 @@ FROM python:3.8.13-slim-buster
 ENV PYTHONUNBUFFERED=1 \
     # prevents python creating .pyc files
     PYTHONDONTWRITEBYTECODE=1 \
-    \
-    # pip
-    # PIP_NO_CACHE_DIR=off \
-    # PIP_DISABLE_PIP_VERSION_CHECK=on \
-    # PIP_DEFAULT_TIMEOUT=100 \
-    \
     # poetry
     # https://python-poetry.org/docs/configuration/#using-environment-variables
     POETRY_VERSION=1.1.14 \
