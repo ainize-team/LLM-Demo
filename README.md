@@ -70,4 +70,3 @@ Refer to these links
 
 ## Execute example
 <img src="./image/Example1.png">
-<img src="./image/Example2.png">
