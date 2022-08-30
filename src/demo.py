@@ -15,7 +15,6 @@ async def generate(
     top_p: float,
     no_repeat_ngram_size: int,
     num_return_sequences: int,
-    model_type: str,
 ):
     req = LLMRequest(
         prompt=prompt,
@@ -37,11 +36,11 @@ async def generate(
 with gr.Blocks() as demo:
     with gr.Row():
         with gr.Column():
-            prompt = gr.Textbox(lines=40, label="Enter prompt")
+            prompt = gr.Textbox(lines=40, max_lines=40, label="Enter prompt")
             with gr.Row():
                 gen = gr.Button("Generate")
             with gr.Row():
-                model_types = gr.Radio(["BLOOM-176B", "OPT-66B"], label="Model Types", value="BLOOM-176B")
+                model_types = gr.Radio(["BLOOM-176B"], label="Model Types", value="BLOOM-176B")
             with gr.Group() as advanced_option:
                 with gr.Row():
                     max_new_tokens = gr.Number(label="Max New Tokens", value=16)
@@ -56,7 +55,7 @@ with gr.Blocks() as demo:
                     no_repeat_ngram_size = gr.Number(label="No Repeat ngram size", value=0)
                     num_return_sequences = gr.Slider(1, 5, label="Num Return Sequences", value=1)
         with gr.Column():
-            res = gr.Textbox(lines=60, label="result")
+            res = gr.Textbox(lines=60, max_lines=60, label="result")
         gen.click(
             fn=generate,
             inputs=[
