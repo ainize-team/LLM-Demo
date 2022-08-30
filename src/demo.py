@@ -40,6 +40,7 @@ with gr.Blocks() as demo:
             with gr.Row():
                 gen = gr.Button("Generate")
             with gr.Row():
+                # TODO: Add Model Endpoint with DB
                 model_types = gr.Radio(["BLOOM-176B"], label="Model Types", value="BLOOM-176B")
             with gr.Group() as advanced_option:
                 with gr.Row():
@@ -69,10 +70,9 @@ with gr.Blocks() as demo:
                 top_p,
                 no_repeat_ngram_size,
                 num_return_sequences,
-                model_types,
             ],
             outputs=res,
         )
 
 
-demo.launch(server_name="0.0.0.0", server_port=7860)
+demo.launch(server_name="0.0.0.0", server_port=7861)
